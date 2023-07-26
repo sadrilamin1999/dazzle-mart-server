@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
 );
 
 // Sign up
-userSchema.static.signup = async function (
+userSchema.statics.signup = async function (
   name,
   email,
   password,
@@ -66,7 +66,7 @@ userSchema.static.signup = async function (
   const user = await this.create({
     name,
     email,
-    password,
+    password: hashPass,
     image,
     address,
     occupation,
@@ -76,7 +76,7 @@ userSchema.static.signup = async function (
 };
 
 // Login
-userSchema.static.login = async function (email, password) {
+userSchema.statics.login = async function (email, password) {
   if (!email || !password) {
     throw new Error("All field must be filled.");
   }
